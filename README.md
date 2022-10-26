@@ -32,7 +32,8 @@
  
 ## Build requirement
 
-- Android minimun version: 24 (Android 7.0)
+- Android minimum version: 24 (Android 7.0)
+- Android Studio minimum version: Chipmunk 2021.2.1
 - Set embedded JDK 11:
   - Go to the project structure
   - Then click on SDK Location
