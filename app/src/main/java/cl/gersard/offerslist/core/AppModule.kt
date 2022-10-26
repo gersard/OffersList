@@ -9,9 +9,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.Dispatchers
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+import kotlin.coroutines.CoroutineContext
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -32,5 +34,8 @@ object AppModule {
 
     @Provides
     fun providesBasketDataSource(basketDataSourceImpl: BasketDataSourceImpl) : BasketDataSource = basketDataSourceImpl
+
+    @Provides
+    fun providesCoroutineContext() : CoroutineContext = Dispatchers.IO
 
 }

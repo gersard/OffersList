@@ -12,12 +12,15 @@ import cl.gersard.offerslist.data.model.BasketItem
 import cl.gersard.offerslist.data.model.Offer
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 @HiltViewModel
 data class OffersViewModel @Inject constructor(
     private val offersDataSource: OffersDataSource,
-    private val basketDataSource: BasketDataSource
+    private val basketDataSource: BasketDataSource,
+    private val coroutineContext: CoroutineContext
 ) : ViewModel() {
 
     private var _offersList = MutableLiveData<Event<List<Offer>>>()
@@ -33,7 +36,7 @@ data class OffersViewModel @Inject constructor(
         _offersList.value = Event.Loading(true)
 
         // make the service call
-        val offersList = offersDataSource.getOffers()
+        val offersList = withContext(coroutineContext) { offersDataSource.getOffers() }
 
         _offersList.value = Event.Loading(false)
 
